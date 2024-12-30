@@ -1,0 +1,23 @@
+docker
+------
+getting started:
+    docker build -t pyspark-app .
+    docker run -it pyspark-app
+
+docker build automatically detects Dockerfile in your current directory
+to install dependencies on docker container, you can copy your requirements.txt file into the container
+    if you get a permissions error, adding '--no-cache-dir --target=/tmp/requirements' to your pip install line
+    can fix it
+you can download a docker image and load that at the start of your dockerfile.
+    this made it completely painless to get up and running with spark, and would likely be just as easy with airflowdocker
+
+put . at the end of your docker build -t pyspark-app . <-
+
+when trying to pip install, pip was looking for a .local directory that didn't exist
+    below fixes this:
+        ENV PYTHONUSERBASE=/app/.local # note that /app/ is specific to the directory I created, it could be whatever directory I want
+
+venv
+----
+lets you keep your dependencies isolated to a single project
+need to make sure the venv is activated, can see it is activated by (venv) in the terminal
